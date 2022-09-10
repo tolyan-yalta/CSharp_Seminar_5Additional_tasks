@@ -24,14 +24,29 @@ int amount_digits(int number)   // Количество цифр в числе
 bool simple_number(int number)  // Проверка простое ли число
 {
     bool result = false;
-    for(int i = 2; i < number; i++)    
+
+    if(number <= 1 )
+    {
+        return result;
+    }
+
+    if(number == 2 || number == 3)
+    {
+        result = true;
+        return result;
+    }
+    if(number % 2 == 0)
+    {
+        return result;
+    }
+    for(int i = 3; i * i < number; i+= 2)    
     { 
-        if(number % i == 0) break;
-        else if(i == number - 1)
+        if(number % i == 0) 
         {
-            result = true;
+            return result;
         }
     }
+    result = true;
     return result;
 }
 
@@ -58,7 +73,10 @@ for(int i = 0; i < length; i++)     // Заполняем массив подч�
         amount1 += 1;
         temp = number;
     }
-    if(amount1 == amount) break;
+    if(amount1 == amount) 
+    {
+        break;
+    }
 }
 
 for(int i = 0; i < length; i++)     // Для наглядности выводим получившийся массив
@@ -70,7 +88,10 @@ for(int i = 0; i < length; i++)             // Проверка чисел на 
 {
     for(int j = i + 1; j < length; j++)
     {
-        if(array[i] == array[j]) array[j] = -1;
+        if(array[i] == array[j])
+        {
+            array[j] = -1;
+        } 
     }  
 }
 
@@ -83,13 +104,19 @@ for(int i = 0; i < length; i++)     // Для наглядности вывод�
 
 int count1 = 0;
 int count2 = 0;
-bool result =false;
+bool result = false;
 for(int i = 0; i < length; i++)     // Подсчет количества подчисел и прстых чисел
 {
-    if(array[i] >= 0) count1 += 1;
+    if(array[i] >= 0) 
+    {
+        count1 += 1;
+    }
     result = simple_number(array[i]);
-    if(result == true) count2 += 1;
-    result =false;
+    if(result == true) 
+    {
+        count2 += 1;
+    }
+    result = false;
 }
 
 Console.WriteLine("\nЧисло N имеет " + count1 + " подчисел, из них " + count2 + " являются простыми.");
